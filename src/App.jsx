@@ -5,10 +5,10 @@ import { IssueProvider } from './context/IssueContext';
 
 function App() {
   return (
-    <IssueProvider>
+    <>
       <CommonHeader />
       <IssueList />
-    </IssueProvider>
+    </>
   );
 }
 

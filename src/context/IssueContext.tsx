@@ -1,18 +1,19 @@
 import React, { Dispatch, createContext, useContext, useReducer } from 'react';
 import { IIssue, IState } from '../types/type';
 
-type FetchAction =
+type IFetchAction =
   | { type: 'FETCH_ISSUES_START' }
   | { type: 'FETCH_ISSUES_SUCCESS'; payload: IIssue[] }
-  | { type: 'FETCH_ISSUES_FAILURE'; payload: Error };
+  | { type: 'FETCH_ISSUES_FAILURE'; payload: Error }
+  | { type: 'FETCH_ISSUE_DETAIL_SUCCESS'; payload: IIssue };
 
-type DispatchType = Dispatch<FetchAction>;
+type DispatchType = Dispatch<IFetchAction>;
 
 const issueContext = createContext<{ state: IState; dispatch: DispatchType } | undefined>(
   undefined,
 );
 
-const issueReducer = (state: IState, action: FetchAction): IState => {
+const issueReducer = (state: IState, action: IFetchAction): IState => {
   switch (action.type) {
     case 'FETCH_ISSUES_START':
       return { ...state, isLoading: true, isError: null };
@@ -20,6 +21,8 @@ const issueReducer = (state: IState, action: FetchAction): IState => {
       return { ...state, isLoading: false, issues: action.payload };
     case 'FETCH_ISSUES_FAILURE':
       return { ...state, isLoading: false, isError: action.payload };
+    case 'FETCH_ISSUE_DETAIL_SUCCESS':
+      return { ...state, isLoading: false, issues: [action.payload] };
     default:
       return state;
   }

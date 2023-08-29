@@ -10,7 +10,7 @@ const IssueList = () => {
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_ISSUES_START' });
-
+      //TODO: data, err 타입을 any이 아닌 다른 타입으로 설정할 수 있는지 알아보고 수정하기
       try {
         const issuesFromApi = await fetchIssues();
         const issues: IIssue[] = (issuesFromApi || []).map((data: any) => ({

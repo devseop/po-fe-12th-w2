@@ -1,18 +1,5 @@
 import React, { Dispatch, createContext, useContext, useReducer } from 'react';
-
-export interface IIssue {
-  issueNumber: number;
-  title: string;
-  author: string;
-  createdDate: string;
-  commentCount: number;
-}
-
-interface IState {
-  issues: IIssue[];
-  isLoading: boolean;
-  isError: Error | null;
-}
+import { IIssue, IState } from '../types/type';
 
 type FetchAction =
   | { type: 'FETCH_ISSUES_START' }

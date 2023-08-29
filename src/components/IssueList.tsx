@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { IIssue, useIssueContext } from '../context/IssueContext';
+import { useIssueContext } from '../context/IssueContext';
 import { fetchIssues } from '../api/api';
+import { IIssue } from '../types/type';
 
 const IssueList = () => {
   const { state, dispatch } = useIssueContext();
@@ -36,7 +37,7 @@ const IssueList = () => {
       ) : (
         <div>
           <ul>
-            {state.issues.map((issue) => (
+            {state.issues.map((issue: IIssue) => (
               <li key={issue.issueNumber}>
                 <Link to={`issues/${issue.issueNumber}`}>
                   <p>번호: {issue.issueNumber}</p>

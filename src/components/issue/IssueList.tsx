@@ -70,7 +70,7 @@ const IssueList = () => {
       ) : (
         <section>
           <ListWrapper>
-            {state.issues.map((issue: IIssue, index) => (
+            {state.issues.map((issue: IIssue, index: number) => (
               <IssueItem issue={issue} index={index} key={issue.issueNumber} />
             ))}
           </ListWrapper>

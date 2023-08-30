@@ -20,6 +20,8 @@ npm start
 src
  ┣ api
  ┃ ┗ api.ts
+ ┣ assets
+ ┃ ┗ ic_error.svg
  ┣ components
  ┃ ┣ issue
  ┃ ┃ ┣ IssueDetail.tsx
@@ -27,6 +29,8 @@ src
  ┃ ┃ ┗ IssueList.tsx
  ┃ ┣ AdBanner.tsx
  ┃ ┣ CommonHeader.tsx
+ ┃ ┣ IsError.tsx
+ ┃ ┣ IsLoading.tsx
  ┃ ┗ MarkdownRenderer.tsx
  ┣ constant
  ┃ ┗ urls.ts
@@ -41,6 +45,7 @@ src
  ┣ utils
  ┃ ┗ convertDateToKr.ts
  ┣ App.tsx
+ ┣ custom.d.ts
  ┣ index.tsx
  ┗ style.css
 ```
@@ -84,6 +89,14 @@ pages와 components 폴더를 주축으로 하고 api, hook 등 추가적으로 
 ```
 
 ## 요구사항
+### 필수 사항
+- 이슈 목록 및 상세 화면 기능 구현
+- 데이터 요청 중 로딩 표시
+- 에러 화면 구현
+- 지정된 조건(open 상태, 코멘트 많은 순)에 맞게 데이터 요청 및 표시
+
+### 선택 사항
+- CSS-in-JS 적용
 
 ### API
 
@@ -104,8 +117,9 @@ pages와 components 폴더를 주축으로 하고 api, hook 등 추가적으로 
 - 화면을 아래로 스크롤 할 시 이슈 목록 추가 로딩 (인피니티 스크롤)
 - 다섯번째 셀마다 광고 이미지 출력
   - 광고 이미지 클릭 시 https://www.wanted.co.kr/ 로 이동
- 
-![assign1_final](https://github.com/devseop/po-fe-12th-w2/assets/102455161/250a0655-d481-4bc9-8064-2726fc926816)
+
+![assign1_real_final](https://github.com/devseop/po-fe-12th-w2/assets/102455161/12a12f51-991c-4c3c-8034-8750e19f6eb2)
+
 
 ### ✅ Assignment 2
 
@@ -114,7 +128,8 @@ pages와 components 폴더를 주축으로 하고 api, hook 등 추가적으로 
 - 이슈의 상세 내용 표시
 - ‘이슈번호, 이슈제목, 작성자, 작성일, 코멘트 수, 작성자 프로필 이미지, 본문' 표시
 
-![assign2](https://github.com/devseop/po-fe-12th-w2/assets/102455161/c4daa9d6-5c68-40f8-9aa4-6d4e2cc3ec2e)
+![assign2_final](https://github.com/devseop/po-fe-12th-w2/assets/102455161/38446ac2-5e67-4927-87ab-8bbd496cc899)
+
 
 ## 🫱🏻‍🫲🏿 Commit Convention & Branch Strategy
 

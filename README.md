@@ -105,7 +105,7 @@ pages와 components 폴더를 주축으로 하고 api, hook 등 추가적으로 
 - 다섯번째 셀마다 광고 이미지 출력
   - 광고 이미지 클릭 시 https://www.wanted.co.kr/ 로 이동
  
-![assign1](https://github.com/devseop/po-fe-12th-w2/assets/102455161/5c7febf3-325a-4030-9a02-c37620befb34)
+![assign1_final](https://github.com/devseop/po-fe-12th-w2/assets/102455161/250a0655-d481-4bc9-8064-2726fc926816)
 
 ### ✅ Assignment 2
 

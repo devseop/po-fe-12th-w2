@@ -14,3 +14,10 @@ export interface IState {
   isError: Error | null;
   totalIssues?: number;
 }
+
+export interface IOptions {
+  owner: string;
+  repo: string;
+  lastIssueNumber?: number;
+  page?: number;
+}

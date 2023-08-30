@@ -1,51 +1,45 @@
 import { Octokit } from '@octokit/rest';
 import { API_URL } from '../constant/urls';
-import { IIssue } from '../types/type';
+import { IIssue, IOptions } from '../types/type';
 
 const octokit = new Octokit({
   uth: process.env.PRIVATE_GIT_TOKEN,
 });
 
+const fetchIssuesFromApi = async (options: IOptions) => {
+  const { owner, repo, lastIssueNumber, page } = options;
+
+  const res = await octokit.issues.listForRepo({
+    owner,
+    repo,
+    state: 'open',
+    sort: 'comments',
+    direction: 'desc',
+    per_page: 10,
+    page: page || Math.floor((lastIssueNumber || 0) / 10) + 1,
+  });
+
+  const issues: IIssue[] = (res.data || []).map((data) => ({
+    issueNumber: data.number,
+    title: data.title,
+    author: data.user?.login,
+    createdDate: data.created_at,
+    commentCount: data.comments,
+  }));
+
+  return issues;
+};
+
 export const fetchIssues = async (lastIssueNumber?: number) => {
   try {
-    if (lastIssueNumber !== undefined) {
-      const res = await octokit.issues.listForRepo({
-        owner: API_URL.owner,
-        repo: API_URL.repo,
-        state: 'open',
-        sort: 'comments',
-        direction: 'desc',
-        per_page: 10,
-        page: Math.floor((lastIssueNumber + 1) / 10) + 1,
-      });
-      const newIssues: IIssue[] = (res.data || []).map((data) => ({
-        issueNumber: data.number,
-        title: data.title,
-        author: data.user?.login,
-        createdDate: data.created_at,
-        commentCount: data.comments,
-      }));
-      return newIssues;
-    } else {
-      const res = await octokit.issues.listForRepo({
-        owner: API_URL.owner,
-        repo: API_URL.repo,
-        state: 'open',
-        sort: 'comments',
-        direction: 'desc',
-        per_page: 10,
-      });
-      const issues: IIssue[] = (res.data || []).map((data) => ({
-        issueNumber: data.number,
-        title: data.title,
-        author: data.user?.login,
-        createdDate: data.created_at,
-        commentCount: data.comments,
-      }));
-      return issues;
-    }
+    return await fetchIssuesFromApi({
+      owner: API_URL.owner,
+      repo: API_URL.repo,
+      lastIssueNumber,
+    });
   } catch (err) {
     console.error(err);
+    return [];
   }
 };
 

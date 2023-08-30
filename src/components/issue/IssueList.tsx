@@ -1,11 +1,8 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useIssueContext } from '../../context/IssueContext';
 import { fetchIssues, getTotalIssues } from '../../api/api';
 import { IIssue } from '../../types/type';
-import AdBanner from '../AdBanner';
 import useInfinityScroll from '../../hooks/useInfinityScroll';
-import { converDate } from '../../utils/convertDateToKr';
 import { styled } from 'styled-components';
 import IssueItem from './IssueItem';
 

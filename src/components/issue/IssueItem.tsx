@@ -16,7 +16,7 @@ const IssueItem = ({ issue, index }: IIssueItem) => {
 
   return (
     <>
-      {index !== 0 && (index + 1) % 5 === 0 ? <AdBanner /> : null}
+      {index !== 0 && (index + 1) % 5 === 0 && <AdBanner />}
       <Link to={`issues/${issueNumber}`}>
         <ItemWrapper>
           <GoIssueOpened color='#3fb950' />

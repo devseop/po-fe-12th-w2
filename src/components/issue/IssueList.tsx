@@ -12,21 +12,13 @@ const IssueList = () => {
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_ISSUES_START' });
-      //TODO: data, err 타입을 any이 아닌 다른 타입으로 어떻게 했는지 팀원들한테 물어보기
       try {
         const issuesFromApi = await fetchIssues();
         const totalIssuesFromApi = await getTotalIssues();
         if (typeof totalIssuesFromApi === 'number') {
-          const issues: IIssue[] = (issuesFromApi || []).map((data: any) => ({
-            issueNumber: data.number,
-            title: data.title,
-            author: data.user.login,
-            createdDate: data.created_at,
-            commentCount: data.comments,
-          }));
           dispatch({
             type: 'FETCH_ISSUES_SUCCESS',
-            payload: issues,
+            payload: issuesFromApi as IIssue[],
             totalIssues: totalIssuesFromApi,
           });
         }
@@ -45,14 +37,7 @@ const IssueList = () => {
       const lastIssueNumber = state.issues.length - 1;
       if (lastIssueNumber !== undefined) {
         const newIssuesFromApi = await fetchIssues(lastIssueNumber + 1);
-        const newIssues: IIssue[] = (newIssuesFromApi || []).map((data: any) => ({
-          issueNumber: data.number,
-          title: data.title,
-          author: data.user.login,
-          createdDate: data.created_at,
-          commentCount: data.comments,
-        }));
-        dispatch({ type: 'FETCH_MORE_ISSUES_SUCCESS', payload: newIssues });
+        dispatch({ type: 'FETCH_MORE_ISSUES_SUCCESS', payload: newIssuesFromApi as IIssue[] });
       }
     } catch (err: any) {
       dispatch({ type: 'FETCH_ISSUES_FAILURE', payload: err });

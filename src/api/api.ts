@@ -18,8 +18,14 @@ export const fetchIssues = async (lastIssueNumber?: number) => {
         per_page: 10,
         page: Math.floor((lastIssueNumber + 1) / 10) + 1,
       });
-      // console.log(res.data ? '✅ res OK' : '❌ res FAILURE');
-      return res.data;
+      const newIssues: IIssue[] = (res.data || []).map((data) => ({
+        issueNumber: data.number,
+        title: data.title,
+        author: data.user?.login,
+        createdDate: data.created_at,
+        commentCount: data.comments,
+      }));
+      return newIssues;
     } else {
       const res = await octokit.issues.listForRepo({
         owner: API_URL.owner,
@@ -29,7 +35,14 @@ export const fetchIssues = async (lastIssueNumber?: number) => {
         direction: 'desc',
         per_page: 10,
       });
-      return res.data;
+      const issues: IIssue[] = (res.data || []).map((data) => ({
+        issueNumber: data.number,
+        title: data.title,
+        author: data.user?.login,
+        createdDate: data.created_at,
+        commentCount: data.comments,
+      }));
+      return issues;
     }
   } catch (err) {
     console.error(err);
@@ -43,7 +56,6 @@ export const fetchIssueDetail = async (issueNumber: number) => {
       repo: API_URL.repo,
       issue_number: issueNumber,
     });
-    // console.log('res.data', res.data);
     const issueDetail: IIssue = {
       issueNumber: res.data.number,
       title: res.data.title,

@@ -17,6 +17,7 @@ const Banner = styled.div`
   display: flex;
   justify-content: center;
   background-color: white;
+  cursor: pointer;
 `;
 
 export default AdBanner;

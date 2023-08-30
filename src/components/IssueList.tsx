@@ -5,6 +5,7 @@ import { fetchIssues, getTotalIssues } from '../api/api';
 import { IIssue } from '../types/type';
 import AdBanner from './AdBanner';
 import useInfinityScroll from '../hooks/useInfinityScroll';
+import { converDateToKr } from '../utils/convertDateToKr';
 
 const IssueList = () => {
   const { state, dispatch } = useIssueContext();
@@ -12,7 +13,7 @@ const IssueList = () => {
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_ISSUES_START' });
-      //TODO: data, err 타입을 any이 아닌 다른 타입으로 설정할 수 있는지 알아보고 수정하기
+      //TODO: data, err 타입을 any이 아닌 다른 타입으로 어떻게 했는지 팀원들한테 물어보기
       try {
         const issuesFromApi = await fetchIssues();
         const totalIssuesFromApi = await getTotalIssues();
@@ -42,7 +43,6 @@ const IssueList = () => {
       return;
     }
     try {
-      // const lastIssueNumber = state.issues[state.issues.length - 1]?.issueNumber;
       const lastIssueNumber = state.issues.length - 1;
       if (lastIssueNumber !== undefined) {
         const newIssuesFromApi = await fetchIssues(lastIssueNumber + 1);
@@ -60,7 +60,7 @@ const IssueList = () => {
     }
   };
 
-  const containerRef = useInfinityScroll(loadMoreIssues);
+  const refForInfinityScroll = useInfinityScroll(loadMoreIssues);
 
   return (
     <>
@@ -78,13 +78,13 @@ const IssueList = () => {
                   <p>이슈번호: {issue.issueNumber}</p>
                   <p>이슈제목: {issue.title}</p>
                   <p>작성자: {issue.author}</p>
-                  <p>작성일: {issue.createdDate}</p>
+                  <p>작성일: {converDateToKr(issue.createdDate)}</p>
                   <p>코멘트: {issue.commentCount}</p>
                 </Link>
               </li>
             ))}
           </ul>
-          <div ref={containerRef} />
+          <div ref={refForInfinityScroll} />
         </div>
       )}
     </>

@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useIssueContext } from '../context/IssueContext';
 import { fetchIssueDetail } from '../api/api';
 import { IIssue } from '../types/type';
+import CommonHeader from './CommonHeader';
+import { converDateToKr } from '../utils/convertDateToKr';
 
 const IssueDetail = () => {
   const { state, dispatch } = useIssueContext();
@@ -24,19 +26,18 @@ const IssueDetail = () => {
 
   const issue = state.issues.find((issue) => issue.issueNumber === Number(issueNumber));
 
-  // console.log('issue', issue);
-
   return (
     <div>
-      <h1>Issue Detail</h1>
+      <CommonHeader />
       {issue ? (
         <div>
-          <p>번호: {issue.issueNumber}</p>
-          <p>이슈명: {issue.title}</p>
+          <p>이슈번호: {issue.issueNumber}</p>
+          <p>이슈제목: {issue.title}</p>
+          <img src={issue.profileImage} alt={issue.author} />
           <p>작성자: {issue.author}</p>
-          <p>작성일: {issue.createdDate}</p>
-          <p>본문: {issue.body}</p>
+          <p>작성일: {converDateToKr(issue.createdDate)}</p>
           <p>댓글: {issue.commentCount}</p>
+          <p>본문: {issue.body}</p>
         </div>
       ) : (
         <p>Loading...</p>

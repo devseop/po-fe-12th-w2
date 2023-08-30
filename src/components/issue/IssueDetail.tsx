@@ -1,10 +1,15 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import CommonHeader from '../CommonHeader';
+import MarkdownRenderer from '../MarkdownRenderer';
+
 import { useIssueContext } from '../../context/IssueContext';
 import { fetchIssueDetail } from '../../api/api';
 import { IIssue } from '../../types/type';
-import CommonHeader from '../CommonHeader';
 import { converDate } from '../../utils/convertDateToKr';
+
+import { styled } from 'styled-components';
+import { GoComment } from 'react-icons/go';
 
 const IssueDetail = () => {
   const { state, dispatch } = useIssueContext();
@@ -27,23 +32,80 @@ const IssueDetail = () => {
   const issue = state.issues.find((issue) => issue.issueNumber === Number(issueNumber));
 
   return (
-    <div>
+    <>
       <CommonHeader />
       {issue ? (
-        <div>
-          <p>이슈번호: {issue.issueNumber}</p>
-          <p>이슈제목: {issue.title}</p>
-          <img src={issue.profileImage} alt={issue.author} />
-          <p>작성자: {issue.author}</p>
-          <p>작성일: {converDate(issue.createdDate)}</p>
-          <p>댓글: {issue.commentCount}</p>
-          <p>본문: {issue.body}</p>
-        </div>
+        <Wrapper>
+          <DescWrapper>
+            <TitleWrapper>
+              <AuthorProfile src={issue.profileImage} alt={issue.author} />
+              <Title>
+                #{issue.issueNumber} {issue.title}
+              </Title>
+            </TitleWrapper>
+            <Comment>
+              <GoComment />
+              <span>{issue.commentCount}</span>
+            </Comment>
+          </DescWrapper>
+          <Desc>
+            opened on {converDate(issue.createdDate)} by {issue.author}
+          </Desc>
+          <MarkdownRenderer content={issue.body} />
+        </Wrapper>
       ) : (
         <p>Loading...</p>
       )}
-    </div>
+    </>
   );
 };
+
+const Wrapper = styled.div`
+  color: white;
+`;
+
+const DescWrapper = styled.header`
+  padding: 0 20px 12px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+`;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: flex-start;
+`;
+
+const AuthorProfile = styled.img`
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+`;
+
+const Title = styled.h1`
+  font-size: 16px;
+  font-weight: 700;
+  word-wrap: break-word;
+`;
+
+const Comment = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  span {
+    font-size: 12px;
+    text-align: right;
+  }
+`;
+
+const Desc = styled.span`
+  padding: 0 20px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+`;
 
 export default IssueDetail;

@@ -22,14 +22,16 @@ const IssueItem = ({ issue, index }: IIssueItem) => {
           <GoIssueOpened color='#3fb950' />
           <DescWrapper>
             <TitleWrapper>
-              <Title>{title}</Title>
+              <Title>
+                #{issueNumber} {title}
+              </Title>
               <Comment>
                 <GoComment />
                 <span>{commentCount}</span>
               </Comment>
             </TitleWrapper>
             <Desc>
-              #{issueNumber} opened on {converDate(createdDate)} by {author}
+              opened on {converDate(createdDate)} by {author}
             </Desc>
           </DescWrapper>
         </ItemWrapper>
@@ -58,6 +60,12 @@ const TitleWrapper = styled.article`
   margin-bottom: 8px;
 `;
 
+const Title = styled.h1`
+  font-size: 16px;
+  font-weight: 700;
+  word-wrap: break-word;
+`;
+
 const Comment = styled.div`
   display: flex;
   align-items: center;
@@ -67,12 +75,6 @@ const Comment = styled.div`
     font-size: 12px;
     text-align: right;
   }
-`;
-
-const Title = styled.h1`
-  font-size: 16px;
-  font-weight: 700;
-  word-wrap: break-word;
 `;
 
 const Desc = styled.span`

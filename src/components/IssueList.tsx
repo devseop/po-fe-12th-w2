@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useIssueContext } from '../context/IssueContext';
 import { fetchIssues } from '../api/api';
 import { IIssue } from '../types/type';
+import AdBanner from './AdBanner';
 
 const IssueList = () => {
   const { state, dispatch } = useIssueContext();
@@ -37,14 +38,15 @@ const IssueList = () => {
       ) : (
         <div>
           <ul>
-            {state.issues.map((issue: IIssue) => (
+            {state.issues.map((issue: IIssue, index) => (
               <li key={issue.issueNumber}>
+                {index !== 0 && (index + 1) % 5 === 0 ? <AdBanner /> : null}
                 <Link to={`issues/${issue.issueNumber}`}>
-                  <p>번호: {issue.issueNumber}</p>
-                  <p>이슈명: {issue.title}</p>
+                  <p>이슈번호: {issue.issueNumber}</p>
+                  <p>이슈제목: {issue.title}</p>
                   <p>작성자: {issue.author}</p>
                   <p>작성일: {issue.createdDate}</p>
-                  <p>댓글: {issue.commentCount}</p>
+                  <p>코멘트: {issue.commentCount}</p>
                 </Link>
               </li>
             ))}

@@ -9,7 +9,6 @@ import { IIssue } from '../../types/type';
 import { converDate } from '../../utils/convertDateToKr';
 
 import { styled } from 'styled-components';
-import { GoComment } from 'react-icons/go';
 
 const IssueDetail = () => {
   const { state, dispatch } = useIssueContext();
@@ -43,15 +42,12 @@ const IssueDetail = () => {
                 #{issue.issueNumber} {issue.title}
               </Title>
             </TitleWrapper>
-            <Comment>
-              <GoComment />
-              <span>{issue.commentCount}</span>
-            </Comment>
+            <Desc>
+              opened on {converDate(issue.createdDate)} by {issue.author} · {issue.commentCount}{' '}
+              comments
+            </Desc>
           </DescWrapper>
-          <Desc>
-            opened on {converDate(issue.createdDate)} by {issue.author}
-          </Desc>
-          <MarkdownRenderer content={issue.body} />
+          <Content>{issue.body && <MarkdownRenderer content={issue.body} />}</Content>
         </Wrapper>
       ) : (
         <p>Loading...</p>
@@ -65,24 +61,26 @@ const Wrapper = styled.div`
 `;
 
 const DescWrapper = styled.header`
-  padding: 0 20px 12px 16px;
+  padding: 0 20px 20px 16px;
+  margin-bottom: 18px;
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
   gap: 16px;
+  border-bottom: 1px solid black;
 `;
 
 const TitleWrapper = styled.div`
   display: flex;
   gap: 12px;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 `;
 
 const AuthorProfile = styled.img`
   width: 48px;
   height: 48px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
+  border-radius: 4px;
 `;
 
 const Title = styled.h1`
@@ -91,21 +89,13 @@ const Title = styled.h1`
   word-wrap: break-word;
 `;
 
-const Comment = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 4px;
-
-  span {
-    font-size: 12px;
-    text-align: right;
-  }
-`;
-
 const Desc = styled.span`
-  padding: 0 20px;
   color: rgba(255, 255, 255, 0.6);
   font-size: 12px;
+`;
+
+const Content = styled.article`
+  padding: 0 20px;
 `;
 
 export default IssueDetail;

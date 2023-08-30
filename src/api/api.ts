@@ -48,6 +48,7 @@ export const fetchIssueDetail = async (issueNumber: number) => {
       issueNumber: res.data.number,
       title: res.data.title,
       author: res.data.user?.login,
+      profileImage: res.data.user?.avatar_url,
       createdDate: res.data.created_at,
       commentCount: res.data.comments,
       body: res.data.body,

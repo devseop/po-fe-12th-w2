@@ -2,6 +2,7 @@ export interface IIssue {
   issueNumber: number;
   title: string;
   author: string | undefined;
+  profileImage?: string;
   createdDate: string;
   commentCount: number;
   body?: string | null | undefined;

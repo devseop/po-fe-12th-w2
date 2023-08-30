@@ -96,6 +96,7 @@ const Desc = styled.span`
 
 const Content = styled.article`
   padding: 0 20px;
+  margin-bottom: 28px;
 `;
 
 export default IssueDetail;

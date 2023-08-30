@@ -16,6 +16,7 @@ const MarkdownRenderer = ({ content }: IMarkDownRendererProps) => {
       remarkPlugins={[remarkGfm]}
       rehypePlugins={[rehypeKatex]}
       components={{
+        img: ({ node, ...props }) => <img style={{ maxWidth: '100%' }} {...props} alt='' />,
         code({ node, inline, className, children, ...props }) {
           const match = /language-(\w+)/.exec(className || '');
           return !inline && match ? (

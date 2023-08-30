@@ -1,8 +1,8 @@
 # 원티드 프리온보딩 12th 2주차 개인 과제
 
-🗓️ 진행 기간: 23년 8월 29일 ~ 23년 8월 30일
+원티드 프리온보딩 12th 2주차에 진행된 개인 과제입니다.
 
-※ 본 과제는 [원티드 프리온보딩 12th 2주차 과제](https://lean-mahogany-686.notion.site/Week-2-a28eb717312a434498ea431d2ff8fc17)를 바탕으로 진행되었습니다.
+본 과제는 특정 깃헙 레파지토리([github issue](https://github.com/facebook/react/issues))의 이슈 목록과 상세 내용을 확인하는 웹 사이트 구축하는 것이 목표입니다.
 
 ## 🧑🏻‍💻 프로젝트 정보
 
@@ -103,7 +103,7 @@ pages와 components 폴더를 주축으로 하고 api, hook 등 추가적으로 
 - GitHub REST API
 - token을 발급하지 않으면 시간 당 60회로 API 호출 횟수 제한 됨
 - 개발 시에는 access token을 발급받아 60회 제한 없이 개발 권장
-- 이후 과제 제출 및 배포단계에서는 access token이 노출되지 않도록 주의 [(github REST API)](https://docs.github.com/en/rest?apiVersion=2022-11-28)
+- 이후 과제 제출 및 배포단계에서는 access token이 노출되지 않도록 주의 ([github REST API](https://docs.github.com/en/rest?apiVersion=2022-11-28))
 
 ## 📝 구현 내용
 

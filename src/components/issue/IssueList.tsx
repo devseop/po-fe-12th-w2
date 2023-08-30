@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
-import { useIssueContext } from '../../context/IssueContext';
-import { fetchIssues, getTotalIssues } from '../../api/api';
-import { IIssue } from '../../types/type';
-import useInfinityScroll from '../../hooks/useInfinityScroll';
-import { styled } from 'styled-components';
 import IssueItem from './IssueItem';
+import IsLoading from '../IsLoading';
+import IsError from '../IsError';
+
+import { fetchIssues, getTotalIssues } from '../../api/api';
+import { useIssueContext } from '../../context/IssueContext';
+import useInfinityScroll from '../../hooks/useInfinityScroll';
+import { IIssue } from '../../types/type';
+
+import { styled } from 'styled-components';
 
 const IssueList = () => {
   const { state, dispatch } = useIssueContext();
@@ -49,9 +53,11 @@ const IssueList = () => {
   return (
     <>
       {state.isLoading ? (
-        <p>is Loading...</p>
+        Array(10)
+          .fill(1)
+          .map((_, i) => <IsLoading key={i} />)
       ) : state.isError ? (
-        <p>Error: {state.isError.message}</p>
+        <IsError error={state.isError.message} />
       ) : (
         <section>
           <ListWrapper>

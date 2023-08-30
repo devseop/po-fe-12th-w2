@@ -11,7 +11,6 @@ interface IMarkDownRendererProps {
 }
 
 const MarkdownRenderer = ({ content }: IMarkDownRendererProps) => {
-  console.log(content);
   return (
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}

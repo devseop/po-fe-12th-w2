@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useIssueContext } from '../context/IssueContext';
-import { fetchIssues, getTotalIssues } from '../api/api';
-import { IIssue } from '../types/type';
-import AdBanner from './AdBanner';
-import useInfinityScroll from '../hooks/useInfinityScroll';
-import { converDateToKr } from '../utils/convertDateToKr';
+import { useIssueContext } from '../../context/IssueContext';
+import { fetchIssues, getTotalIssues } from '../../api/api';
+import { IIssue } from '../../types/type';
+import AdBanner from '../AdBanner';
+import useInfinityScroll from '../../hooks/useInfinityScroll';
+import { converDate } from '../../utils/convertDateToKr';
+import { styled } from 'styled-components';
+import IssueItem from './IssueItem';
 
 const IssueList = () => {
   const { state, dispatch } = useIssueContext();
@@ -69,26 +71,28 @@ const IssueList = () => {
       ) : state.isError ? (
         <p>Error: {state.isError.message}</p>
       ) : (
-        <div>
-          <ul>
+        <section>
+          <ListWrapper>
             {state.issues.map((issue: IIssue, index) => (
-              <li key={issue.issueNumber}>
-                {index !== 0 && (index + 1) % 5 === 0 ? <AdBanner /> : null}
-                <Link to={`issues/${issue.issueNumber}`}>
-                  <p>이슈번호: {issue.issueNumber}</p>
-                  <p>이슈제목: {issue.title}</p>
-                  <p>작성자: {issue.author}</p>
-                  <p>작성일: {converDateToKr(issue.createdDate)}</p>
-                  <p>코멘트: {issue.commentCount}</p>
-                </Link>
-              </li>
+              <IssueItem issue={issue} index={index} key={issue.issueNumber} />
             ))}
-          </ul>
+          </ListWrapper>
           <div ref={refForInfinityScroll} />
-        </div>
+        </section>
       )}
     </>
   );
 };
+
+const ListWrapper = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
+`;
 
 export default IssueList;

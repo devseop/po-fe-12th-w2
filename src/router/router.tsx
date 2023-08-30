@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import App from '../App';
-import IssueDetail from '../components/IssueDetail';
+import IssueDetail from '../components/issue/IssueDetail';
 import { IssueProvider } from '../context/IssueContext';
 
 const Router = () => {

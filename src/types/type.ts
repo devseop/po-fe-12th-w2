@@ -11,4 +11,5 @@ export interface IState {
   issues: IIssue[];
   isLoading: boolean;
   isError: Error | null;
+  totalIssues?: number;
 }

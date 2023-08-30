@@ -6,17 +6,31 @@ const octokit = new Octokit({
   uth: process.env.PRIVATE_GIT_TOKEN,
 });
 
-export const fetchIssues = async () => {
+export const fetchIssues = async (lastIssueNumber?: number) => {
   try {
-    const res = await octokit.issues.listForRepo({
-      owner: API_URL.owner,
-      repo: API_URL.repo,
-      state: 'open',
-      sort: 'comments',
-      direction: 'desc',
-      per_page: 10,
-    });
-    return res.data;
+    if (lastIssueNumber !== undefined) {
+      const res = await octokit.issues.listForRepo({
+        owner: API_URL.owner,
+        repo: API_URL.repo,
+        state: 'open',
+        sort: 'comments',
+        direction: 'desc',
+        per_page: 10,
+        page: Math.floor((lastIssueNumber + 1) / 10) + 1,
+      });
+      // console.log(res.data ? '✅ res OK' : '❌ res FAILURE');
+      return res.data;
+    } else {
+      const res = await octokit.issues.listForRepo({
+        owner: API_URL.owner,
+        repo: API_URL.repo,
+        state: 'open',
+        sort: 'comments',
+        direction: 'desc',
+        per_page: 10,
+      });
+      return res.data;
+    }
   } catch (err) {
     console.error(err);
   }
@@ -41,5 +55,18 @@ export const fetchIssueDetail = async (issueNumber: number) => {
     return issueDetail;
   } catch (err) {
     console.error(err);
+  }
+};
+
+export const getTotalIssues = async () => {
+  try {
+    const res = await octokit.repos.get({
+      owner: API_URL.owner,
+      repo: API_URL.repo,
+    });
+    return res.data.open_issues;
+  } catch (err) {
+    console.error(err);
+    return undefined;
   }
 };

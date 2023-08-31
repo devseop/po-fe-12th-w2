@@ -131,11 +131,9 @@ pages와 components 폴더를 주축으로 하고 api, hook 등 추가적으로 
 ![assign2_final](https://github.com/devseop/po-fe-12th-w2/assets/102455161/38446ac2-5e67-4927-87ab-8bbd496cc899)
 
 
-## 🫱🏻‍🫲🏿 Commit Convention & Branch Strategy
+## 🫱🏻‍🫲🏿 Commit Convention
 
 커밋 컨벤션과 브랜치 전략은 1주차 팀 과제 진행시 결정된 팀 컨벤션을 따랐습니다.
-
-### Commit Convention
 
 e.g. FEAT: 로그인 유효성 검증 기능 구현
 
@@ -152,14 +150,3 @@ e.g. FEAT: 로그인 유효성 검증 기능 구현
 | RENAME:   | 파일 혹은 폴더명을 수정하거나 옮기는 작업                      |
 | REMOVE:   | 파일을 삭제하는 작업만 수행한 경우                             |
 | INIT:     | 초기 커밋을 진행한 경우                                        |
-
-### Branch Strategy
-
-브랜치는 아래의 브랜치만 사용하도록 협의했습니다.
-
-| 브랜치    | 설명                               |
-| --------- | ---------------------------------- |
-| main      | 배포 및 최종본, 출시 버전의 브랜치 |
-| develop   | 개발용 버전의 기준이 되는 브랜치   |
-| feature/~ | 세부 기능 개발을 위한 브랜치       |
-| refactor  | 리팩토링을 위한 브랜치             |

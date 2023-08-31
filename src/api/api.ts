@@ -5,7 +5,7 @@ import { IIssue, IOptions } from '../types/type';
 const octokit = new Octokit({
   uth: process.env.PRIVATE_GIT_TOKEN,
 });
-
+/** API 호출 및 데이터 매핑 */
 const fetchIssuesFromApi = async (options: IOptions) => {
   const { owner, repo, lastIssueNumber, page } = options;
 
@@ -30,6 +30,7 @@ const fetchIssuesFromApi = async (options: IOptions) => {
   return issues;
 };
 
+/** API 호출과 관련된 에러 처리 */
 export const fetchIssues = async (lastIssueNumber?: number) => {
   try {
     return await fetchIssuesFromApi({

@@ -72,7 +72,6 @@ const DescWrapper = styled.header`
 const TitleWrapper = styled.div`
   display: flex;
   gap: 12px;
-  justify-content: space-between;
   align-items: center;
 `;
 

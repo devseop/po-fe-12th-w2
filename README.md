@@ -7,6 +7,8 @@
 ## 🧑🏻‍💻 프로젝트 정보
 
 ### 실행 방법
+- 배포 링크: https://relaxed-ganache-18edeb.netlify.app/
+- 링크가 실행되지 않는 경우 아래 명령어를 차례대로 입력하여 실행해주세요.
 
 ```jsx
 git clone https://github.com/devseop/po-fe-12th-w2
